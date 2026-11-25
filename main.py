@@ -14,6 +14,10 @@ import os
 
 LINE = "I'm on holiday until Monday. My inbox is watched by my fridge, which only answers emails about snacks and has accepted two meetings."
 
+# Gate guard: the sealed scorer only accepts a single non-blank line of
+# 1 to 140 characters; fail loudly here instead of shipping an invalid entry.
+assert 1 <= len(LINE) <= 140 and "\n" not in LINE and LINE.strip(), "entry violates the gate"
+
 
 def main() -> None:
     os.makedirs("/output", exist_ok=True)
